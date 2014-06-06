@@ -1,0 +1,7 @@
+[paths]
+default = https://code.google.com/p/granger-causality-neuron/
+
+
+[tortoisehg]
+postpull = update
+autoresolve = True

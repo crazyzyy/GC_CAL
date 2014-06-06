@@ -1,0 +1,10 @@
+When trying to install windows SDK, remove vc++2010 or its redistribution!
+Glut32!!!
+
+一、如果您的系统提示"找不到glut32.dll"或"glut32.dll缺失" 或者"glut32.dll错误"等等，请不用担心，请把glut32.dll下载到本机。
+ 二、直接拷贝该文件到系统目录里：
+ 　　 1、Windows 95/98/Me系统，将glut32.dll复制到C:\Windows\System目录下。
+ 　　 2、Windows NT/2000系统，将glut32.dll复制到C:\WINNT\System32目录下。
+ 　　 3、Windows XP/WIN7系统，将glut32.dll复制到C:\Windows\System32目录下。
+ 三、然后打开"开始-运行-输入regsvr32 glut32.dll"，回车即可解决错误提示！希望多特软件站为您提供的glut32.dll对您有所帮助！ 
+64bit system: C:\windows\syswow64
