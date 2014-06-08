@@ -1,10 +1,13 @@
 % Whiten the auto spectrum of each variable
 
-function [WS,Hv,H] = nStdWhiteS(S)
+function [WS,Hv,H] = nStdWhiteS(S,cutod)
 if size(S,2)~=size(S,3)
   error('S shoule be fftlen*p*p matrix');
 end
-
+if ~exist('cutod','var')
+    cutod = [];
+%     cutod = 20;
+end
 p   = size(S,2);
 len = size(S,1);
 X = zeros(len, p);
@@ -38,7 +41,7 @@ for k=1:p
 end
 
 if p>=2
-H2 = WS2H(WS);
+H2 = WS2H(WS,cutod);
 Hv2 = mdminv(H2);
  
 WS = nUprod(Hv2,WS);

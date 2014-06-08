@@ -1,7 +1,7 @@
 % transform WS to H when Sxy is small 
 %WS ~len*p*p
 function [H] = WS2H(WS,cutod)
-if ~isempty('cutod','var')
+if ~exist('cutod','var')
     cutod = [];
 end
  len = size(WS,1);

@@ -1,6 +1,6 @@
 %compute GC from S len*p*p 
 %compute GC from j to i
-function GCj2i= GCfacSj2i(S,j,i,iter,mode)
+function GCj2x = GCfacSj2x(S,j, iter, mode)
 if ~exist('iter','var')
     iter = 1;
 end
@@ -10,8 +10,8 @@ end
 p = size(S,2);
 
 idx = 1:p;
-idx([i j]) = [];
-SN = permuteS(S,[i idx j]);
+idx(j) = [];
+SN = permuteS(S,[idx j]);
 SN1 = SN(:,1:p-1,1:p-1);
 
 switch mode
@@ -22,8 +22,7 @@ switch mode
         cov1 = WIfacS(SN1,iter);
         cov = WIfacS(SN,iter);
 end
-GCj2i = log(cov1(1,1)/cov(1,1));
-    
-
-
-
+GCj2x = zeros(p,1);
+for i = 1:p-1
+    GCj2x(idx(i)) = log(cov1(i,i)/cov(i,i));
+end
