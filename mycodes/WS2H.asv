@@ -1,6 +1,9 @@
 % transform WS to H when Sxy is small 
 %WS ~len*p*p
-function [H] = WS2H(WS)
+function [H] = WS2H(WS,cutod)
+if ~isempty('c','var')
+    chs = 1;
+end
  len = size(WS,1);
  p  = size(WS,2);
  H = zeros(size(WS));
@@ -9,8 +12,12 @@ function [H] = WS2H(WS)
          if i == j;
              H(:,i,j) = ones(len,1,1);
          else
-             H(:,i,j) = chilbert_rev(WS(:,i,j));
-%              H(:,i,j) = conj(chilbert_cut(conj(WS(:,i,j))));
+             switch chs
+                 case 1
+                H(:,i,j) = chilbert_rev(WS(:,i,j));
+                 case 2
+                H(:,i,j) = chilbert_cut(WS(:,i,j));
+             end
          end
      end
  end
