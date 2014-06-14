@@ -1,7 +1,8 @@
 %empirically fit S by rational polynomials.
 function [rS2] = epfitS2(rS,rfreq)
-ff = max(rfreq);
-res = rfreq(2) - rfreq(1);
+rS = Makeup4SpectrumFact(rS);
+% ff = max(rfreq);
+% res = rfreq(2) - rfreq(1);
 rS2 = rS;
 len = length(rfreq);
 rSh = rS(1:end/2+1,:,:);

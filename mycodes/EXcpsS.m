@@ -7,7 +7,7 @@ netstr = 'net_2_2';  % network structure, see directory prj_neuron_gc/network/
 scee = 0.01;         % cortical strength, Ex. to Ex.
 pr = 1   ;              % poisson input rate
 ps = 0.012;          % poisson input strength
-simut = '1e7'; simu_time = str2double(simut);     % simulation time
+simut = '1e6'; simu_time = str2double(simut);     % simulation time
 stv = 1/8;           % sample time interval
 data_dir_prefix = 'D:\GCdata\';
 
