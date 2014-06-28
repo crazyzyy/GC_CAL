@@ -27,7 +27,7 @@ end
 for i = 1:iter
  D = ninvUprod(H,S);
  
-%  max(reshape(std(nUprod(H,E)-S,1),1,[]))
+
  D = D+E;
  
  %get positive frequency part of D
@@ -51,9 +51,18 @@ for i = 1:iter
      SS(j,:,:) = SS1;
  end
  
+ H0 = H;
  H = nprod(H,pD+SS);
 %  squeeze(real(mean(pD+SS,1)))
+
+%  iH = ifft(H);
+%  iH(floor(len/2)+2:end,:,:) = 0;
+%  H = fft(iH);
+ 
 end
+
+% max(reshape(std(nUprod(H,E)-S,1),1,[]))
+ 
 HSigma = real(squeeze(mean(H,1)));
 Sigma = HSigma*HSigma';
 nlz = diag(abs(diag(Sigma)).^-0.5);

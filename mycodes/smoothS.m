@@ -4,7 +4,7 @@ function [S2] = smoothS(S,ratio)
 if ~exist('ratio','var')
     ratio = 0.99;
 end
-cov = real(fft(S));
+cov = real(ifft(S));
 s = sum(cov(:).^2);
 s0 = ratio*s;
 i = 0;
@@ -17,6 +17,6 @@ while ss<s0
 end
 i
 cov(i+1:end-i,:,:) = 0;
-S2 = ifft(cov);
+S2 = fft(cov);
 
 end

@@ -7,19 +7,19 @@ netstr = 'net_2_2';  % network structure, see directory prj_neuron_gc/network/
 scee = 0.01;         % cortical strength, Ex. to Ex.
 pr = 1   ;              % poisson input rate
 ps = 0.012;          % poisson input strength
-simut = '1e6'; simu_time = str2double(simut);     % simulation time
+simut = '1e7'; simu_time = str2double(simut);     % simulation time
 stv = 1/8;           % sample time interval
 data_dir_prefix = 'D:\GCdata\';
 
-netstr = 'net_3_03';
+% netstr = 'net_3_03';
 % pr = 0.24;ps = 0.02;
 %%%%%%%%%%%%%%%%%%%%%%%%Great Changes have been made applying suitable RC
 %%%%%%%%%%%%%%%%%%%%%%%%filter to capture the value at endpoints
-[X, ISI, ras] = gendata_neu(netstr, scee, pr, ps, simu_time, stv,'--RC-filter 0 1',data_dir_prefix);
+[X, ISI, ras] = gendata_neu(netstr, scee, pr, ps, simu_time, stv,'new --RC-filter 0 1',data_dir_prefix);
 
 [p,len] = size(X);
 % fcut = 1;  %(kHz)(fcut <= 1/(2*ftv))
-% ftv = 0.5;
+% ftv = 0.25;
 fcut = 0.5; ftv = 0.5; fcut2 = 0.1;
 
 % [uS,ufreq,uSall] = npSpec2(X, stv,ftv, fcut, 'u'); %(S: n*p*p)
@@ -29,7 +29,7 @@ fcut = 0.5; ftv = 0.5; fcut2 = 0.1;
 
 [uS,ufreq] = npSpec(X, stv,ftv, fcut, 'u'); %(S: n*p*p)
 
-rS2 = epfitS2(rS,rfreq);
+rS2 = epfitSn(rS,rfreq);
 % [uSW, ufreqW] = npSpecW(X, stv,ftv, fcut,fcut2, 'u');
 % [uS,ufreq] = npSpec(X, stv,ftv, fcut, 'u',25); %(S: n*p*p)
 % [rS,rfreq] = npSpec(X, stv,ftv, fcut, 'r',25);
