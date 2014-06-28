@@ -1,11 +1,12 @@
 % Whiten the auto spectrum of each variable
 
-function [WS,Hv,H,WS1,Hv1,H1] = nStdWhiteS(S,cutod)
+function [WS,Hv,H] = nStdWhiteS(S,cutod)
 if size(S,2)~=size(S,3)
   error('S shoule be fftlen*p*p matrix');
 end
 if ~exist('cutod','var')
     cutod = [];
+%     cutod = 20;
 end
 p   = size(S,2);
 len = size(S,1);
@@ -33,7 +34,7 @@ end
 
 Hv = Hv1;
 H = H1;
-WS1 = WS;
+
 % ensure absolute real number
 for k=1:p
   WS(:, k, k) = real(WS(:, k, k));
