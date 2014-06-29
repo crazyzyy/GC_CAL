@@ -1,6 +1,10 @@
 % fit auto spectrum
-function S2 =  FitSa(S,freq)
-S2 = S;
+function S2 =  FitSa(S,freq,cutod)
+if ~exist('cutod','var')
+    S2 = S;
+else
+    S2 = smoothSc(S,cutod);
+end
 len = length(freq);
 Sh = S(1:floor(end/2)+1,:,:);
 

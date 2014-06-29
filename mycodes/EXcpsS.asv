@@ -11,7 +11,7 @@ simut = '1e6'; simu_time = str2double(simut);     % simulation time
 stv = 1/8;           % sample time interval
 data_dir_prefix = 'D:\GCdata\';
 
-% netstr = 'net_3_03';
+netstr = 'net_3_03';
 % pr = 0.24;ps = 0.02;
 %%%%%%%%%%%%%%%%%%%%%%%%Great Changes have been made applying suitable RC
 %%%%%%%%%%%%%%%%%%%%%%%%filter to capture the value at endpoints
