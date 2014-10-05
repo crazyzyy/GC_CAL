@@ -12,7 +12,7 @@ if ~exist('mode','var')
 [p,l]= size(X);
 
 if ~exist('len','var')
-len = 1000; %ms
+len = 200; %ms
 end
 % if ~exist('res','var')
 % res = 1/1000; %/ms
@@ -39,11 +39,12 @@ mT = mT/round(1/stv/res);
 
 TT = len;
 if mode == 'u'
-    aveS = mX2S_nuft(mX, mT, fftlen*2,TT);
+    aveS = mX2S_nuft(mX, mT, fftlen*2*2,TT);
 elseif mode == 'r'
-    aveS = mX2S_nuft_unbiased(mX, mT, fftlen*2,TT);
+    aveS = mX2S_nuft_unbiased(mX, mT, fftlen*2*2,TT);
 end
 
 S = Makeup4SpectrumFact(aveS);
+S(fftlen+1:end-fftlen,:,:) = [];
 freq = (0:fftlen*2-1)*res;
 end

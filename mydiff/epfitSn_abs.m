@@ -1,5 +1,5 @@
 %fit S: len*p*p
-function [rS2] = epfitSn(rS,rfreq,cutod)
+function [rS2] = epfitSn_abs(rS,rfreq,cutod)
 rS = Makeup4SpectrumFact(rS);
 p = size(rS,2);
 rS2 = zeros(size(rS));
@@ -10,7 +10,7 @@ for i = 1:p
         if i == j
             rS2(:,i,j) = FitSa(rS(:,i,j),rfreq);
         else
-            rS2(:,i,j) = FitSc(rS(:,i,j),rfreq);
+            rS2(:,i,j) = FitSc_abs(rS(:,i,j),rfreq);
         end
     end
 end
@@ -21,7 +21,7 @@ else
             if i == j
                 rS2(:,i,j) = FitSa(rS(:,i,j),rfreq,cutod);
             else
-                rS2(:,i,j) = FitSc(rS(:,i,j),rfreq,cutod);
+                rS2(:,i,j) = FitSc_abs(rS(:,i,j),rfreq,cutod);
             end
         end
     end

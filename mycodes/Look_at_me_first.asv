@@ -32,13 +32,14 @@ fclose(fid);
 load('J:\03_DATA\data\net_100_0X07E0EF5A.txt')
 NET_tmp = net_100_0X07E0EF5A;
 
-ISM = MYinferND_new(X,NET_tmp);
+ISM = MYinferND_cond(X(1:50,:));
 
 id1 = NET_tmp ~=0;
 id2 = NET_tmp == 0;
 IE = ISM(id1)./NET_tmp(id1);
 % figure;hist(IE(IE>0),50)
 figure;hist(IE,50)
+figure;hist(ISM(id2),50);
 figure;hist(ISM(:),100)
 std(IE)/mean(IE)
 
@@ -46,10 +47,11 @@ GC = nGrangerT(X,20);
 GCh = sqrt(GC);
 IEg = GCh(id1)./NET_tmp(id1);
 figure;hist(IEg,50)
+figure;hist(GCh(id2),50)
 figure;hist(GCh(:),100)
 std(IEg)/mean(IEg)
 
-save('result100_2','ISM','NET_tmp','GC');
+save('result50_1','ISM','NET_tmp','GC');
 
 
 

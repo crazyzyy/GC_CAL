@@ -8,6 +8,7 @@ addpath([GC_CAL_HOME,'/GCcal_spectrum']);
 addpath([GC_CAL_HOME,'/mydiff']);
 addpath([GC_CAL_HOME,'/mycodes']);
 addpath([GC_CAL_HOME,'/logistic']);
+addpath([GC_CAL_HOME,'/Bayes']);
 addpath([GC_CAL_HOME,'/tools_and_utilities']);
 addpath([GC_CAL_HOME,'/prj_neuron_gc']);
 addpath([GC_CAL_HOME,'/prj_neuron_gc/scan_worker_template']);

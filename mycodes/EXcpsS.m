@@ -3,40 +3,41 @@
 
 %data generation
 
-netstr = 'net_2_2';  % network structure, see directory prj_neuron_gc/network/
+netstr = 'net_3_03';  % network structure, see directory prj_neuron_gc/network/
+netstr = 'net_10_1';
 scee = 0.01;         % cortical strength, Ex. to Ex.
 pr = 1   ;              % poisson input rate
 ps = 0.012;          % poisson input strength
 simut = '1e6'; simu_time = str2double(simut);     % simulation time
-stv = 1/8;           % sample time interval
+stv = 0.5;           % sample time interval
 data_dir_prefix = 'D:\GCdata\';
 
 % netstr = 'net_3_03';
 % pr = 0.24;ps = 0.02;
 %%%%%%%%%%%%%%%%%%%%%%%%Great Changes have been made applying suitable RC
 %%%%%%%%%%%%%%%%%%%%%%%%filter to capture the value at endpoints
-[X, ISI, ras] = gendata_neu(netstr, scee, pr, ps, simu_time, stv,'new --RC-filter 0 1',data_dir_prefix);
+[X, ISI, ras] = gendata_neu(netstr, scee, pr, ps, simu_time, stv,'--RC-filter 0 1',data_dir_prefix);
 
 [p,len] = size(X);
 % fcut = 1;  %(kHz)(fcut <= 1/(2*ftv))
 % ftv = 0.25;
-fcut = 0.5; ftv = 0.5; fcut2 = 0.1;
+fcut = 1; ftv = 0.5; fcut2 = 0.1;
 
 % [uS,ufreq,uSall] = npSpec2(X, stv,ftv, fcut, 'u'); %(S: n*p*p)
 % [rS,rfreq,rSall] = npSpec2(X, stv,ftv, fcut, 'r');
 [rS,rfreq] = npSpec(X, stv,ftv, fcut, 'r');
-
-
 [uS,ufreq] = npSpec(X, stv,ftv, fcut, 'u'); %(S: n*p*p)
+[S,freq] = pSpec(X, stv,ftv, fcut);
 
-rS2 = epfitSn(rS,rfreq);
+rS2 = epfitSn(smoothSc(rS,50),rfreq);
 
-GCfacS(epfitSn(rS,rfreq),10,2)
-GCfacS(epfitSn(rS,rfreq,50),10,2)
-GCfacS(smoothSc(rS2,50),10,2)
-GCfacS(epfitSn(smoothSc(rS,50),rfreq),10,2)
-GCfacS(epfitSn(smoothSc(uS,50),rfreq),10,2)
-getGCSapp(epfitSn(smoothSc(rS,50),rfreq),50)
+
+GCfacS(rS2,10,1)
+% GCfacS(epfitSn(rS,rfreq,50),10,1)
+% GCfacS(smoothSc(rS2,50),10,1)
+GCfacS(epfitSn(smoothSc(rS,50),rfreq),10,1)
+% GCfacS(epfitSn(smoothSc(uS,50),rfreq),10,1)
+% getGCSapp(rS2)
 % 
 % % [uSW, ufreqW] = npSpecW(X, stv,ftv, fcut,fcut2, 'u');
 % % [uS,ufreq] = npSpec(X, stv,ftv, fcut, 'u',25); %(S: n*p*p)
@@ -108,28 +109,38 @@ disp(GC)
 %  subplot(2,2,4)
 %  plot(ufreq,imag(uS(:,1,2)),rfreq,imag(rS(:,1,2)),freq,imag(S(:,1,2)))
 % 
-% %compare S all
-%  figure
-%  subplot(2,2,1)
-%  plot(ufreq,uS(:,1,1),rfreq,rS(:,1,1),freq,S(:,1,1),rfreq,rS2(:,1,1))
-%  subplot(2,2,2)
-%  plot(ufreq,abs(uS(:,1,2)),rfreq,abs(rS(:,1,2)),freq,abs(S(:,1,2)),rfreq,abs(rS2(:,1,2)))
-%  subplot(2,2,3)
-%  plot(ufreq,uS(:,2,2),rfreq,rS(:,2,2),freq,S(:,2,2),rfreq,rS2(:,2,2))
-%  subplot(2,2,4)
-%  plot(ufreq,angle(uS(:,1,2)),rfreq,angle(rS(:,1,2)),freq,angle(S(:,1,2)),rfreq,angle(rS2(:,1,2)))
+%compare S all
+ figure
+ subplot(2,2,1)
+ plot(ufreq,uS(:,1,1),rfreq,rS(:,1,1),freq,S(:,1,1),rfreq,rS2(:,1,1))
+ subplot(2,2,2)
+ plot(ufreq,abs(uS(:,1,2)),rfreq,abs(rS(:,1,2)),freq,abs(S(:,1,2)),rfreq,abs(rS2(:,1,2)))
+ subplot(2,2,3)
+ plot(ufreq,uS(:,2,2),rfreq,rS(:,2,2),freq,S(:,2,2),rfreq,rS2(:,2,2))
+ subplot(2,2,4)
+ plot(ufreq,angle(uS(:,1,2)),rfreq,angle(rS(:,1,2)),freq,angle(S(:,1,2)),rfreq,angle(rS2(:,1,2)))
 %  
-%  %compare S all ri
-%  figure
-%  subplot(2,2,1)
-%  plot(ufreq,uS(:,1,1),rfreq,rS(:,1,1),freq,S(:,1,1),rfreq,rS2(:,1,1))
-%  subplot(2,2,2)
-%  plot(ufreq,real(uS(:,1,2)),rfreq,real(rS(:,1,2)),freq,real(S(:,1,2)),rfreq,real(rS2(:,1,2)))
-%  subplot(2,2,3)
-%  plot(ufreq,uS(:,2,2),rfreq,rS(:,2,2),freq,S(:,2,2),rfreq,rS2(:,2,2))
-%  subplot(2,2,4)
-%  plot(ufreq,imag(uS(:,1,2)),rfreq,imag(rS(:,1,2)),freq,imag(S(:,1,2)),rfreq,imag(rS2(:,1,2)))
-% 
+ %compare S all ri
+ figure
+ subplot(2,2,1)
+ plot(ufreq,uS(:,1,1),rfreq,rS(:,1,1),freq,S(:,1,1),rfreq,rS2(:,1,1))
+ subplot(2,2,2)
+ plot(ufreq,real(uS(:,1,2)),rfreq,real(rS(:,1,2)),freq,real(S(:,1,2)),rfreq,real(rS2(:,1,2)))
+ subplot(2,2,3)
+ plot(ufreq,uS(:,2,2),rfreq,rS(:,2,2),freq,S(:,2,2),rfreq,rS2(:,2,2))
+ subplot(2,2,4)
+ plot(ufreq,imag(uS(:,1,2)),rfreq,imag(rS(:,1,2)),freq,imag(S(:,1,2)),rfreq,imag(rS2(:,1,2)))
+
+  figure
+ subplot(2,2,1)
+ loglog(ufreq,uS(:,1,1),rfreq,rS(:,1,1),freq,S(:,1,1),rfreq,rS2(:,1,1))
+ subplot(2,2,2)
+ loglog(ufreq,real(uS(:,1,2)),rfreq,real(rS(:,1,2)),freq,real(S(:,1,2)),rfreq,real(rS2(:,1,2)))
+ subplot(2,2,3)
+ loglog(ufreq,uS(:,2,2),rfreq,rS(:,2,2),freq,S(:,2,2),rfreq,rS2(:,2,2))
+ subplot(2,2,4)
+ loglog(ufreq,imag(uS(:,1,2)),rfreq,imag(rS(:,1,2)),freq,imag(S(:,1,2)),rfreq,imag(rS2(:,1,2)))
+
 % 
 % %compare SpecW  
 %   figure
