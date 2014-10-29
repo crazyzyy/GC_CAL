@@ -1,0 +1,12 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+DTF_A	DTF_A.m	/^function dtf = DTF_A(A2d, D, fftlen)$/;"	f	language:MatLab
+DTF_R	DTF_R.m	/^function dtf = DTF_R(R, fftlen)$/;"	f	language:MatLab
+PDC	PDC.m	/^function pdc = PDC(X, m, fftlen)$/;"	f	language:MatLab
+PDCAnalyzer	PDCAnalyzer.m	/^function [mean_sqrt_pdc, pdc] = PDCAnalyzer(X, is_plot)$/;"	f	language:MatLab
+PDC_A	PDC_A.m	/^function pdc = PDC_A(A2d, D, fftlen)$/;"	f	language:MatLab
+PDC_R	PDC_R.m	/^function pdc = PDC_R(R, fftlen)$/;"	f	language:MatLab

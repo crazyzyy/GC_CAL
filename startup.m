@@ -12,6 +12,7 @@ addpath([GC_CAL_HOME,'/Bayes']);
 addpath([GC_CAL_HOME,'/tools_and_utilities']);
 addpath([GC_CAL_HOME,'/prj_neuron_gc']);
 addpath([GC_CAL_HOME,'/prj_neuron_gc/scan_worker_template']);
+addpath([GC_CAL_HOME,'/PDC_cal']);
 
 disp('GC calculation package path added.');
 disp(' ');

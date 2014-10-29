@@ -8,4 +8,6 @@ cov1 = cov;
 cov1(od+1:end-od,:,:) = 0;
 Sd = fft(cov1);
 
-Sd = Makeup4SpectrumFact(Sd);
+if length(size(Sd)) ==3
+ Sd = Makeup4SpectrumFact(Sd);
+end

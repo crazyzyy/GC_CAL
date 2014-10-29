@@ -26,7 +26,8 @@ H1 = @(Inp1) cs1(floor((Inp1+1)./dx+1));
 %
 ST0 = X(:,2:end) - X(:,1:end-1);
 ST = ST0<-0.8;
-ST = [ST zeros(p,1)];
+% ST = [ST zeros(p,1)];
+ST = [zeros(p,1) ST];
 
 ISM = zeros(p,p);
 
@@ -50,7 +51,7 @@ xt_1 = x(2:end-1);
 % st_1((ind(2:end))-1) = (rand(size(ind(2:end)))<(sum(st)/length(st)));
 
 I = @(para) sum((xt - H(xt_1+para(1)*dxt_1+para(2)*st_1+para(3))).^2)/length(xt);
-dI = @(para) -[dxt_1;10*st_1;ones(size(dxt_1))]*(2*(xt - H(xt_1+para(1)*dxt_1+para(2)*st_1+para(3))).*H1(xt_1+para(1)*dxt_1+para(2)*st_1+para(3)))'/length(xt);
+dI = @(para) -[dxt_1;st_1;ones(size(dxt_1))]*(2*(xt - H(xt_1+para(1)*dxt_1+para(2)*st_1+para(3))).*H1(xt_1+para(1)*dxt_1+para(2)*st_1+para(3)))'/length(xt);
 
 para = [0.5;0;0];
 
